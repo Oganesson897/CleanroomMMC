@@ -6,13 +6,13 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
 name: Build Test Instance
-run-name: "[${{ github.event.client_payload.version }}] MMC instance of ${{ inputs.branch || github.event.client_payload.branch }}"
+run-name: "[0.2.1-alpha+build.3.run.592] MMC instance of experimental/foundation"
 on:
   workflow_dispatch:
     inputs:
       branch:
         description: 'Cleanroom branch'
-        default: 'main'
+        default: 'experimental/foundation'
   repository_dispatch:
     types: [cleanroom_upload_artifact]
 
@@ -39,14 +39,14 @@ jobs:
     - name: execute py script # run main.py
       run: python main.py
       env:
-        cleanroomDownloadBranch: ${{ inputs.branch || github.event.client_payload.branch }}
+        cleanroomDownloadBranch: experimental/foundation
         commit_hash: ${{ github.event.client_payload.commit_hash }}
         run_job_url: ${{ github.event.client_payload.run_job_url }}
-        version: ${{ github.event.client_payload.version }}
+        version: 0.2.1-alpha+build.3.run.592
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.3.3
       with:
-        name: Cleanroom_MMC ${{ github.event.client_payload.version }}
+        name: Cleanroom_MMC-0.2.1-alpha+build.3.run.592
         # A file, directory or wildcard pattern that describes what to upload
         path: build/output
