@@ -10,6 +10,12 @@ run-name: "[${{ inputs.version }}] MMC instance of ${{ inputs.branch }}"
 on:
   workflow_dispatch:
     inputs:
+      version:
+        description: 'Version'
+      commit_hash:
+        description: 'Hash'
+      run_job_url:
+        description: 'URL'
       branch:
         description: 'Cleanroom branch'
         default: 'main'
